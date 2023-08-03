@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap');
+
+body {
+  background-image: url(../images/background.jpg);
+  background-size: cover;
+  font-family: 'Lora', serif;
+  max-width: 1200px;
+  max-height: 800px;
+  margin: auto;
+}
+
+  .page-title {
+    margin: 20px;
+    font-size: 2.5rem;
+    color:rgb(188, 157, 117);
+    text-align: center;
+  }
+
+  .task-form {
+    display: block;
+    max-width: 600px;
+    text-align: center;
+    margin: auto;
+    padding-bottom: 20px;
+    background-color: rgba(242, 219, 189, 0.5);
+    border-radius: 20px;
+  }
+
+    .task-label {
+      font-size: 1.5rem;
+      padding-top: 20px;
+      color:rgb(143, 119, 85);
+    }
+
+    .task-name, .task-input, .task-btn {
+      display: inherit;
+      margin: auto;
+      margin-top: 20px;
+    }
+
+    .task-name {
+      color:rgb(128, 106, 76);
+    }
+
+    .task-input {
+      height: 30px;
+      width: 300px;
+      border-radius: 10px;
+      border-style: none;
+    }
+    
+    .task-btn {
+      height: 30px;
+      width: 80px;
+      border-radius: 20px;
+      color: white;
+      background-color:rgb(188, 157, 117);
+      border: transparent;
+    }
+
+    .task-btn:hover {
+      cursor: pointer;
+      border: 2px solid rgb(105, 87, 64);
+    }

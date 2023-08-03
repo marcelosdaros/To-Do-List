@@ -3,10 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/style.css">
   <title>To Do List</title>
 </head>
 <body>
-  <h1>To Do List</h1>
+
+  <header>
+    <h1 class="page-title">To Do List</h1>
+  </header>
+
+  <main>
+    <form class="task-form" action="">
+      <h2 class="task-label">Add Task</h2>
+      <fieldset>
+        <label for="taskName" class="task-name">Task Name</label>
+        <input id="taskName" class="task-input" type="text" placeholder="Insert the task's name">
+      </fieldset>
+      <button class="task-btn">Add</button>
+    </form>
+  </main>
+
 </body>
 </html>
