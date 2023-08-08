@@ -19,7 +19,7 @@ body {
 
   .task-form, .task-section {
     display: block;
-    max-width: 1000px;
+    max-width: 1200px;
     text-align: center;
     margin: auto;
     margin-top: 40px;
@@ -42,56 +42,62 @@ body {
       margin-bottom: 20px;
     }
 
-      .task-input, .task-btn {
-        margin: auto;
-        margin-top: 20px;
+      .task-fieldset {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
       }
 
-      .task-input:focus {
-        outline: 2px solid rgb(188, 157, 117);
-      }
+        .task-input:focus {
+          outline: 2px solid rgb(188, 157, 117);
+        }
 
-      .task-name, .task-priority, .task-date {
-        color:rgb(128, 106, 76);
-      }
+        .task-name, .task-priority, .task-date {
+          color:rgb(128, 106, 76);
+        }
 
-      .task-input {
-        height: 30px;
-        width: 450px;
-        border-radius: 10px;
-        border-style: none;
-      }
+        .task-input {
+          height: 30px;
+          width: 450px;
+          border-radius: 10px;
+          border-style: none;
+        }
 
-      .priority, .date {
-        width: 100px;
-      }
+        .priority, .date {
+          width: 100px;
+        }
     
-    .task-btn {
-      height: 30px;
-      width: 80px;
-      border-radius: 20px;
-      color: white;
-      background-color:rgb(188, 157, 117);
-      border: transparent;
-    }
+      .task-btn {
+        height: 30px;
+        width: 80px;
+        margin: 10px 0 10px 0;
+        border-radius: 20px;
+        color: white;
+        background-color:rgb(188, 157, 117);
+        border: transparent;
+      }
 
-    .task-btn:hover, .priority:hover, .date:hover {
-      cursor: pointer;
-    }
+      .task-btn:hover, .priority:hover, .date:hover, .edit-btn:hover, .delete-btn:hover {
+        cursor: pointer;
+        box-sizing: border-box;
+      }
 
-    .task-btn:hover {
-      border: 2px solid rgb(105, 87, 64);
-    }
+      .task-btn:hover, .edit-btn:hover, .delete-btn:hover {
+        border: 2px solid rgb(105, 87, 64);
+      }
 
   .task-section {
     display: flex;
     flex-direction: column;
+    padding: 20px;
   }
 
     .display-titles, .display-task {
       display: flex;
-      justify-content: space-evenly;
-      padding-bottom: 10px;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
       border-radius: 20px;
     }
 
@@ -110,11 +116,6 @@ body {
 
       .display-edition, .display-deletion, .display-name, .display-priority, .display-date {
         color:rgb(128, 106, 76);
-      }
-
-      .display-name, .display-priority, .display-date {
-        height: 40px;
-        border-radius: 10px;
       }
 
       .display-name {
