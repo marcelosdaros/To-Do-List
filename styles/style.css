@@ -88,23 +88,41 @@ body {
     flex-direction: column;
   }
 
-    .display-task {
+    .display-titles, .display-task {
       display: flex;
       justify-content: space-evenly;
-      padding-bottom: 20px;
+      padding-bottom: 10px;
+      border-radius: 20px;
     }
+
+    .display-task {
+      background-color: white;
+    }
+
+      .checkbox-img, .checkbox-space {
+        height: 30px;
+        width: 30px;
+      }
+
+      .checkbox-img:hover {
+        cursor: pointer;
+      }
 
       .display-edition, .display-deletion, .display-name, .display-priority, .display-date {
         color:rgb(128, 106, 76);
       }
 
       .display-name, .display-priority, .display-date {
-        height: 30px;
+        height: 40px;
         border-radius: 10px;
       }
 
       .display-name {
-        width: 500px;
+        width: 550px;
+      }
+
+      .checked {
+        text-decoration: line-through;
       }
 
       .display-priority, .display-date {
