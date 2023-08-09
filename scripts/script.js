@@ -5,28 +5,64 @@ const taskSection = document.querySelector('.task-section')
 const addTaskBtn = document.querySelector('.task-btn')
 
 const checkControl = (event) => {
-  const checkbox = document.querySelector(".checkbox-img")
-  const taskName = document.querySelector('.p-name')
-  console.log(taskName)
+  const ev = event.target
+  const attributes = event.target.attributes
+  console.log(ev)
 
-  if (event.target.dataset.value === "unchecked") {
-    checkbox.src = "../images/checked.jpg"
-    checkbox.setAttribute('data-value', "checked")
-    taskName.className = "display-name p-name checked"
+  if (ev.dataset.value === "unchecked") {
+    attributes.src.value = "../images/checked.jpg"
+    ev.setAttribute('data-value', 'checked')
   } else {
-    checkbox.src = "../images/unchecked.jpg"
-    checkbox.setAttribute('data-value', "unchecked")
-    taskName.className = "display-name p-name"
+    attributes.src.value = "../images/unchecked.jpg"
+    ev.setAttribute('data-value', 'unchecked')
   }
+}
+
+const createTaskSection = () => {
+  const description = document.querySelector('#taskName').value
+  const priority = document.querySelector('#taskPriority').value
+  const date = document.querySelector('#taskDate').value
+
+  const taskElement = document.createElement('section')
+  taskElement.className = 'display-task'
+
+  const image = document.createElement('img')
+  image.src = '../images/unchecked.jpg'
+  image.className = 'checkbox-img'
+  image.setAttribute('data-value', 'unchecked')
+  image.addEventListener('click', checkControl, false)
+  taskElement.appendChild(image)
+
+  const taskName = document.createElement('p')
+  taskName.className = 'display-name p-name'
+  taskName.innerHTML = description
+  taskElement.appendChild(taskName)
+
+  const taskPriority = document.createElement('p')
+  taskPriority.className = 'display-priority'
+  taskPriority.innerHTML = priority
+  taskElement.appendChild(taskPriority)
+
+  const taskDate = document.createElement('p')
+  taskDate.className = 'display-date'
+  taskDate.innerHTML = date
+  taskElement.appendChild(taskDate)
+
+  const editBtn = document.createElement('button')
+  editBtn.className = 'edit-btn'
+  editBtn.innerHTML = 'Edit'
+  taskElement.appendChild(editBtn)
+
+  const deleteBtn = document.createElement('button')
+  deleteBtn.className = 'delete-btn'
+  deleteBtn.innerHTML = 'Delete'
+  taskElement.appendChild(deleteBtn)
+
+  taskSection.appendChild(taskElement)
 }
 
 const addTask = (event) => {
   event.preventDefault()
-
-  const description = document.querySelector('#taskName').value
-  const priority = document.querySelector('#taskPriority').value
-  const date = document.querySelector('#taskDate').value
-  console.log(description, priority, date)
 
   if (localStorage.getItem('tasks') === null) {
     taskSection.innerHTML = `
@@ -37,28 +73,19 @@ const addTask = (event) => {
         <p class="display-date">Completion date</p>
         <p class="display-edition">Edit</p>
         <p class="display-deletion">Delete</p>
-      </section>
-      <section class="display-task">
-        <img src="../images/unchecked.jpg" class="checkbox-img" data-value="unchecked">
-        <p class="display-name p-name">${description}</p>
-        <p class="display-priority">${priority}</p>
-        <p class="display-date">${date}</p>
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
-      </section>`
+      </section>`;
   }
-  // else {
-  //   const taskElement = document.createElement('section')
-  //   const taskDescription = document.createElement('p')
-  //   taskDescription.innerHTML = document.querySelector('.task-input').value
-  //   taskElement.appendChild(taskDescription)
-  //   console.log(taskDescription.innerHTML)
-  //   taskSection.appendChild(taskElement)
-  // }
-  // localStorage.setItem('tasks', taskDescription.innerHTML)
-
-  const task = document.querySelector('.checkbox-img')
-  task.addEventListener("click", checkControl, false)
+  createTaskSection()
+  localStorage.setItem('tasks', 'not null')
 }
 
 addTaskBtn.addEventListener('click', addTask, false)
+
+// <section class="display-task">
+//   <img src="../images/unchecked.jpg" class="checkbox-img" data-value="unchecked">
+//   <p class="display-name p-name">${description}</p>
+//   <p class="display-priority">${priority}</p>
+//   <p class="display-date">${date}</p>
+//   <button class="edit-btn">Edit</button>
+//   <button class="delete-btn">Delete</button>
+// </section>

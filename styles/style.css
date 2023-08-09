@@ -80,7 +80,6 @@ body {
 
       .task-btn:hover, .priority:hover, .date:hover, .edit-btn:hover, .delete-btn:hover {
         cursor: pointer;
-        box-sizing: border-box;
       }
 
       .task-btn:hover, .edit-btn:hover, .delete-btn:hover {
@@ -96,16 +95,19 @@ body {
     .display-titles, .display-task {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       margin-bottom: 10px;
       border-radius: 20px;
     }
 
     .display-task {
       background-color: white;
+      align-items: center;
+      padding-top: 6px;
+      padding-bottom: 6px;
     }
 
       .checkbox-img, .checkbox-space {
+        margin-left: 9px;
         height: 30px;
         width: 30px;
       }
@@ -122,6 +124,14 @@ body {
         width: 550px;
       }
 
+      .display-edition, .display-deletion {
+        width: 50px;
+      }
+
+      .display-deletion, .delete-btn {
+        margin-right: 9px;
+      }
+
       .checked {
         text-decoration: line-through;
       }
@@ -136,5 +146,5 @@ body {
         height: 30px;
         width: 50px;
         border-radius: 10px;
-        border-style: none;
+        border: 2px solid transparent;
       }
