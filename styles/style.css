@@ -30,7 +30,7 @@ body {
   }
 
     .task-label {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       padding-top: 20px;
       color:rgb(143, 119, 85);
     }
@@ -49,19 +49,20 @@ body {
         gap: 15px;
       }
 
-        .task-input:focus {
-          outline: 2px solid rgb(188, 157, 117);
-        }
-
         .task-name, .task-priority, .task-date {
+          font-size: 1.1rem;
           color:rgb(128, 106, 76);
         }
 
         .task-input {
-          height: 30px;
+          height: 37px;
           width: 450px;
           border-radius: 10px;
           border-style: none;
+        }
+
+        .task-input:focus {
+          outline: 2px solid rgb(188, 157, 117);
         }
 
         .priority, .date {
@@ -73,6 +74,7 @@ body {
         width: 80px;
         margin: 10px 0 10px 0;
         border-radius: 20px;
+        font-size: 1rem;
         color: white;
         background-color:rgb(188, 157, 117);
         border: transparent;
@@ -108,8 +110,8 @@ body {
 
       .checkbox-img, .checkbox-space {
         margin-left: 9px;
-        height: 30px;
-        width: 30px;
+        height: 25px;
+        width: 25px;
       }
 
       .checkbox-img:hover {
@@ -134,6 +136,7 @@ body {
 
       .checked {
         text-decoration: line-through;
+        text-decoration-thickness: 1.5px;
       }
 
       .display-priority, .display-date {
@@ -143,7 +146,7 @@ body {
       .edit-btn, .delete-btn {
         color: white;
         background-color:rgb(188, 157, 117);
-        height: 30px;
+        height: 25px;
         width: 50px;
         border-radius: 10px;
         border: 2px solid transparent;

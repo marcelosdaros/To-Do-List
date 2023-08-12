@@ -1,20 +1,26 @@
 'use strict';
 
-// const body = document.querySelector('body')
 const taskSection = document.querySelector('.task-section')
 const addTaskBtn = document.querySelector('.task-btn')
 
 const checkControl = (event) => {
   const ev = event.target
-  const attributes = event.target.attributes
-  console.log(ev)
+  const attributes = ev.attributes
+  const nodes = ev.parentElement.childNodes
 
   if (ev.dataset.value === "unchecked") {
     attributes.src.value = "../images/checked.jpg"
     ev.setAttribute('data-value', 'checked')
+    for (let i = 0; i <= 3; i++) {
+      nodes[i].className += ' checked'
+    }
   } else {
     attributes.src.value = "../images/unchecked.jpg"
     ev.setAttribute('data-value', 'unchecked')
+    for (let i = 0; i <= 3; i++) {
+      const newClass = nodes[i].className.replace(' checked', '')
+      nodes[i].className = newClass
+    }
   }
 }
 
@@ -34,7 +40,7 @@ const createTaskSection = () => {
   taskElement.appendChild(image)
 
   const taskName = document.createElement('p')
-  taskName.className = 'display-name p-name'
+  taskName.className = 'display-name'
   taskName.innerHTML = description
   taskElement.appendChild(taskName)
 
