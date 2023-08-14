@@ -2,6 +2,7 @@
 
 const taskSection = document.querySelector('.task-section')
 const addTaskBtn = document.querySelector('.task-btn')
+let taskNumber = 0
 
 const checkControl = (event) => {
   const ev = event.target
@@ -11,17 +12,23 @@ const checkControl = (event) => {
   if (ev.dataset.value === "unchecked") {
     attributes.src.value = "../images/checked.jpg"
     ev.setAttribute('data-value', 'checked')
-    for (let i = 0; i <= 3; i++) {
+    for (let i = 1; i <= 3; i++) {
       nodes[i].className += ' checked'
     }
   } else {
     attributes.src.value = "../images/unchecked.jpg"
     ev.setAttribute('data-value', 'unchecked')
-    for (let i = 0; i <= 3; i++) {
+    for (let i = 1; i <= 3; i++) {
       const newClass = nodes[i].className.replace(' checked', '')
       nodes[i].className = newClass
     }
   }
+}
+
+const deleteTask = (event) => {
+  document.querySelector('.task-section').removeChild(
+    document.getElementById(event.target.parentElement.id)
+  )
 }
 
 const createTaskSection = () => {
@@ -30,6 +37,7 @@ const createTaskSection = () => {
   const date = document.querySelector('#taskDate').value
 
   const taskElement = document.createElement('section')
+  taskElement.id = taskNumber
   taskElement.className = 'display-task'
 
   const image = document.createElement('img')
@@ -62,6 +70,7 @@ const createTaskSection = () => {
   const deleteBtn = document.createElement('button')
   deleteBtn.className = 'delete-btn'
   deleteBtn.innerHTML = 'Delete'
+  deleteBtn.addEventListener('click', deleteTask, false)
   taskElement.appendChild(deleteBtn)
 
   taskSection.appendChild(taskElement)
@@ -70,7 +79,7 @@ const createTaskSection = () => {
 const addTask = (event) => {
   event.preventDefault()
 
-  if (localStorage.getItem('tasks') === null) {
+  if (taskNumber === 0) {
     taskSection.innerHTML = `
       <section class="display-titles">
         <p class="checkbox-space"></p>
@@ -81,8 +90,8 @@ const addTask = (event) => {
         <p class="display-deletion">Delete</p>
       </section>`;
   }
+  taskNumber += 1
   createTaskSection()
-  localStorage.setItem('tasks', 'not null')
 }
 
 addTaskBtn.addEventListener('click', addTask, false)
