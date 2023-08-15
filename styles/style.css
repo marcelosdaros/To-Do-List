@@ -55,7 +55,7 @@ body {
         }
 
         .task-input {
-          height: 37px;
+          height: 35px;
           width: 450px;
           border-radius: 10px;
           border-style: none;
@@ -80,7 +80,7 @@ body {
         border: transparent;
       }
 
-      .task-btn:hover, .priority:hover, .date:hover, .edit-btn:hover, .delete-btn:hover {
+      .task-btn:hover, .priority:hover, .date:hover, .edit-btn:hover, .delete-btn:hover, .confirmation-btn:hover, .cancellation-btn:hover {
         cursor: pointer;
       }
 
@@ -92,6 +92,7 @@ body {
     display: flex;
     flex-direction: column;
     padding: 20px;
+    color:rgb(128, 106, 76);
   }
 
     .display-titles, .display-task {
@@ -116,10 +117,6 @@ body {
 
       .checkbox-img:hover {
         cursor: pointer;
-      }
-
-      .display-edition, .display-deletion, .display-name, .display-priority, .display-date {
-        color:rgb(128, 106, 76);
       }
 
       .display-name {
@@ -151,3 +148,59 @@ body {
         border-radius: 10px;
         border: 2px solid transparent;
       }
+
+  /* .modal-wrapper, .section-wrapper {
+    transition: 0.5s;
+    opacity: 1;
+    pointer-events: all;
+  } */
+
+  .modal-wrapper {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    color: black;
+    background-color: rgba(0, 0, 0, 0.7)
+  }
+
+  .hide {
+    display: none;
+  }
+
+    .section-wrapper {
+      position: fixed;
+      top: 300px;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+      margin: 0 auto;
+      max-height: 150px;
+      max-width: 400px;
+      background-color:rgb(188, 157, 117);
+      border-radius: 20px;
+    }
+
+      .confirmation-title {
+        text-align: center;
+        padding-top: 20px;
+      }
+
+      .btn-wrapper {
+        display: flex;
+        gap: 20px;
+        position: absolute;
+        left: 90px;
+        bottom: 20px;
+      }
+
+        .confirmation-btn, .cancellation-btn {
+          display: block;
+          color: white;
+          background-color: rgb(128, 106, 76);
+          height: 30px;
+          width: 100px;
+          border-radius: 10px;
+          border: 2px solid transparent;
+        }

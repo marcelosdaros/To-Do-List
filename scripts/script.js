@@ -2,7 +2,10 @@
 
 const taskSection = document.querySelector('.task-section')
 const addTaskBtn = document.querySelector('.task-btn')
-let taskNumber = 0
+const deleteTaskBtn = document.querySelector('.confirmation-btn')
+const cancelDeletionBtn = document.querySelector('.cancellation-btn')
+const modal = document.querySelector('.modal-wrapper')
+let nextTaskId = 0
 
 const checkControl = (event) => {
   const ev = event.target
@@ -13,22 +16,38 @@ const checkControl = (event) => {
     attributes.src.value = "../images/checked.jpg"
     ev.setAttribute('data-value', 'checked')
     for (let i = 1; i <= 3; i++) {
-      nodes[i].className += ' checked'
+      nodes[i].classList.toggle('checked')
     }
   } else {
     attributes.src.value = "../images/unchecked.jpg"
     ev.setAttribute('data-value', 'unchecked')
     for (let i = 1; i <= 3; i++) {
-      const newClass = nodes[i].className.replace(' checked', '')
-      nodes[i].className = newClass
+      nodes[i].classList.toggle('checked')
     }
   }
 }
 
 const deleteTask = (event) => {
+  modal.classList.toggle('hide')
+
+  const id = parseInt(event.target.parentElement.id)
   document.querySelector('.task-section').removeChild(
-    document.getElementById(event.target.parentElement.id)
+    document.getElementById(id)
   )
+  
+  // Adjust all the next IDs to i-1 since the previous was deleted
+  for (let i = id; i < nextTaskId; i++) {
+    document.getElementById(i+1).id = i
+  }
+  nextTaskId -= 1
+  
+  if (nextTaskId === 0) {
+    taskSection.innerHTML = 'No data to display. Add tasks to start your to-do list!'
+  }
+}
+
+const confirmDeletion = (event) => {
+  modal.classList.toggle('hide')
 }
 
 const createTaskSection = () => {
@@ -37,7 +56,7 @@ const createTaskSection = () => {
   const date = document.querySelector('#taskDate').value
 
   const taskElement = document.createElement('section')
-  taskElement.id = taskNumber
+  taskElement.id = nextTaskId
   taskElement.className = 'display-task'
 
   const image = document.createElement('img')
@@ -78,8 +97,9 @@ const createTaskSection = () => {
 
 const addTask = (event) => {
   event.preventDefault()
+  nextTaskId += 1
 
-  if (taskNumber === 0) {
+  if (nextTaskId === 1) {
     taskSection.innerHTML = `
       <section class="display-titles">
         <p class="checkbox-space"></p>
@@ -90,11 +110,12 @@ const addTask = (event) => {
         <p class="display-deletion">Delete</p>
       </section>`;
   }
-  taskNumber += 1
   createTaskSection()
 }
 
 addTaskBtn.addEventListener('click', addTask, false)
+deleteTaskBtn.addEventListener('click', confirmDeletion, false)
+cancelDeletionBtn.addEventListener('click', confirmDeletion, false)
 
 // <section class="display-task">
 //   <img src="../images/unchecked.jpg" class="checkbox-img" data-value="unchecked">
