@@ -6,6 +6,7 @@ const deleteTaskBtn = document.querySelector('.confirmation-btn')
 const cancelDeletionBtn = document.querySelector('.cancellation-btn')
 const modal = document.querySelector('.modal-wrapper')
 let nextTaskId = 0
+let currDeletion = 0
 
 const checkControl = (event) => {
   const ev = event.target
@@ -28,26 +29,30 @@ const checkControl = (event) => {
 }
 
 const deleteTask = (event) => {
+  currDeletion = parseInt(event.target.parentElement.id)
   modal.classList.toggle('hide')
+}
 
-  const id = parseInt(event.target.parentElement.id)
+const confirmDeletion = (event) => {
+  modal.classList.toggle('hide')
   document.querySelector('.task-section').removeChild(
-    document.getElementById(id)
+    document.getElementById(currDeletion)
   )
   
-  // Adjust all the next IDs to i-1 since the previous was deleted
-  for (let i = id; i < nextTaskId; i++) {
+  for (let i = currDeletion; i < nextTaskId; i++) {
     document.getElementById(i+1).id = i
   }
   nextTaskId -= 1
+  currDeletion = 0
   
   if (nextTaskId === 0) {
     taskSection.innerHTML = 'No data to display. Add tasks to start your to-do list!'
   }
 }
 
-const confirmDeletion = (event) => {
+const cancelDeletion = (event) => {
   modal.classList.toggle('hide')
+  currDeletion = 0
 }
 
 const createTaskSection = () => {
@@ -115,7 +120,7 @@ const addTask = (event) => {
 
 addTaskBtn.addEventListener('click', addTask, false)
 deleteTaskBtn.addEventListener('click', confirmDeletion, false)
-cancelDeletionBtn.addEventListener('click', confirmDeletion, false)
+cancelDeletionBtn.addEventListener('click', cancelDeletion, false)
 
 // <section class="display-task">
 //   <img src="../images/unchecked.jpg" class="checkbox-img" data-value="unchecked">
