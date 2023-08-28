@@ -122,6 +122,7 @@ addTaskBtn.addEventListener('click', addTask, false)
 deleteTaskBtn.addEventListener('click', confirmDeletion, false)
 cancelDeletionBtn.addEventListener('click', cancelDeletion, false)
 
+console.log('test')
 // <section class="display-task">
 //   <img src="../images/unchecked.jpg" class="checkbox-img" data-value="unchecked">
 //   <p class="display-name p-name">${description}</p>
