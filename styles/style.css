@@ -182,9 +182,15 @@ body {
       border-radius: 20px;
     }
 
-      .confirmation-title {
+      .confirmation-title, .labelCheckMsg {
+        display: block;
+        font-size: 1.1rem;
         text-align: center;
         padding-top: 20px;
+      }
+
+      .labelCheckMsg {
+        font-size: 0.9rem;
       }
 
       .btn-wrapper {

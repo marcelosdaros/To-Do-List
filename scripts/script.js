@@ -2,11 +2,13 @@
 
 const taskSection = document.querySelector('.task-section')
 const addTaskBtn = document.querySelector('.task-btn')
+const checkNoMsg = document.querySelector('.checkNoMsg')
 const deleteTaskBtn = document.querySelector('.confirmation-btn')
 const cancelDeletionBtn = document.querySelector('.cancellation-btn')
 const modal = document.querySelector('.modal-wrapper')
 let nextTaskId = 0
 let currDeletion = 0
+let hideMsg = false
 
 const checkControl = (event) => {
   const ev = event.target
@@ -53,6 +55,10 @@ const confirmDeletion = (event) => {
 const cancelDeletion = (event) => {
   modal.classList.toggle('hide')
   currDeletion = 0
+}
+
+const hideConfirmationMsg = (event) => {
+  console.log(event.target.checked) // return true or false
 }
 
 const createTaskSection = () => {
@@ -119,6 +125,7 @@ const addTask = (event) => {
 }
 
 addTaskBtn.addEventListener('click', addTask, false)
+checkNoMsg.addEventListener('change', hideConfirmationMsg, false)
 deleteTaskBtn.addEventListener('click', confirmDeletion, false)
 cancelDeletionBtn.addEventListener('click', cancelDeletion, false)
 
