@@ -80,7 +80,7 @@ body {
         border: transparent;
       }
 
-      .task-btn:hover, .priority:hover, .date:hover, .edit-btn:hover, .delete-btn:hover, .confirmation-btn:hover, .cancellation-btn:hover {
+      .task-btn:hover, .priority:hover, .date:hover, .edit-btn:hover, .delete-btn:hover, .confirmation-btn:hover, .cancellation-btn:hover, .checkbox-img:hover {
         cursor: pointer;
       }
 
@@ -113,10 +113,6 @@ body {
         margin-left: 9px;
         height: 25px;
         width: 25px;
-      }
-
-      .checkbox-img:hover {
-        cursor: pointer;
       }
 
       .display-name {

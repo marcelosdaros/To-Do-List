@@ -30,13 +30,22 @@ const checkControl = (event) => {
   }
 }
 
-const deleteTask = (event) => {
+const processDeletion = (event) => {
   currDeletion = parseInt(event.target.parentElement.id)
+  if (!hideMsg) {
+    modal.classList.toggle('hide')
+  }
+  else {
+    confirmDeletion()
+  }
+}
+
+const deleteAndHideScreen = (event) => {
+  confirmDeletion()
   modal.classList.toggle('hide')
 }
 
-const confirmDeletion = (event) => {
-  modal.classList.toggle('hide')
+const confirmDeletion = () => {
   document.querySelector('.task-section').removeChild(
     document.getElementById(currDeletion)
   )
@@ -58,7 +67,7 @@ const cancelDeletion = (event) => {
 }
 
 const hideConfirmationMsg = (event) => {
-  console.log(event.target.checked) // return true or false
+  event.target.checked ? hideMsg = true : hideMsg = false
 }
 
 const createTaskSection = () => {
@@ -100,7 +109,7 @@ const createTaskSection = () => {
   const deleteBtn = document.createElement('button')
   deleteBtn.className = 'delete-btn'
   deleteBtn.innerHTML = 'Delete'
-  deleteBtn.addEventListener('click', deleteTask, false)
+  deleteBtn.addEventListener('click', processDeletion, false)
   taskElement.appendChild(deleteBtn)
 
   taskSection.appendChild(taskElement)
@@ -126,7 +135,7 @@ const addTask = (event) => {
 
 addTaskBtn.addEventListener('click', addTask, false)
 checkNoMsg.addEventListener('change', hideConfirmationMsg, false)
-deleteTaskBtn.addEventListener('click', confirmDeletion, false)
+deleteTaskBtn.addEventListener('click', deleteAndHideScreen, false)
 cancelDeletionBtn.addEventListener('click', cancelDeletion, false)
 
 // <section class="display-task">
