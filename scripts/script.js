@@ -2,11 +2,15 @@
 
 const taskSection = document.querySelector('.task-section')
 const addTaskBtn = document.querySelector('.task-btn')
+const modalEdit = document.querySelector('.modal-wrapper-edit')
+const modalDeletion = document.querySelector('.modal-wrapper-deletion')
 const checkNoMsg = document.querySelector('.checkNoMsg')
-const deleteTaskBtn = document.querySelector('.confirmation-btn')
-const cancelDeletionBtn = document.querySelector('.cancellation-btn')
-const modal = document.querySelector('.modal-wrapper')
+const deleteTaskBtn = document.querySelector('.confirm-deletion-btn')
+const cancelDeletionBtn = document.querySelector('.cancel-deletion-btn')
+const editTaskBtn = document.querySelector('.confirm-edition-btn')
+const cancelEditionBtn = document.querySelector('.cancel-edition-btn')
 let nextTaskId = 0
+let currEdition = 0
 let currDeletion = 0
 let hideMsg = false
 
@@ -30,10 +34,39 @@ const checkControl = (event) => {
   }
 }
 
+const processEdition = (event) => {
+  const nodes = event.target.parentElement.childNodes
+  const editName = document.querySelector('.edit-name-input')
+  editName.placeholder = nodes[1].innerHTML
+
+  currEdition = parseInt(event.target.parentElement.id)
+  console.log(currEdition)
+  modalEdit.classList.toggle('hide')
+}
+
+const confirmEdition = (event) => {
+  event.preventDefault()
+
+  const newName = document.querySelector('.edit-name-input').value
+  const newPriority = document.querySelector('.edit-priority-input').value
+  const newDate = document.querySelector('.edit-date-input').value
+
+  const taskToEdit = document.getElementById(currEdition)
+  taskToEdit.childNodes[1].innerHTML = newName
+  taskToEdit.childNodes[2].innerHTML = newPriority
+  taskToEdit.childNodes[3].innerHTML = newDate
+
+  modalEdit.classList.toggle('hide')
+}
+
+const cancelEdition = (event) => {
+  modalEdit.classList.toggle('hide')
+}
+
 const processDeletion = (event) => {
   currDeletion = parseInt(event.target.parentElement.id)
   if (!hideMsg) {
-    modal.classList.toggle('hide')
+    modalDeletion.classList.toggle('hide')
   }
   else {
     confirmDeletion()
@@ -42,7 +75,7 @@ const processDeletion = (event) => {
 
 const deleteAndHideScreen = (event) => {
   confirmDeletion()
-  modal.classList.toggle('hide')
+  modalDeletion.classList.toggle('hide')
 }
 
 const confirmDeletion = () => {
@@ -62,8 +95,10 @@ const confirmDeletion = () => {
 }
 
 const cancelDeletion = (event) => {
-  modal.classList.toggle('hide')
+  modalDeletion.classList.toggle('hide')
   currDeletion = 0
+  hideMsg = false
+  checkNoMsg.checked = false
 }
 
 const hideConfirmationMsg = (event) => {
@@ -104,6 +139,7 @@ const createTaskSection = () => {
   const editBtn = document.createElement('button')
   editBtn.className = 'edit-btn'
   editBtn.innerHTML = 'Edit'
+  editBtn.addEventListener('click', processEdition, false)
   taskElement.appendChild(editBtn)
 
   const deleteBtn = document.createElement('button')
@@ -137,6 +173,8 @@ addTaskBtn.addEventListener('click', addTask, false)
 checkNoMsg.addEventListener('change', hideConfirmationMsg, false)
 deleteTaskBtn.addEventListener('click', deleteAndHideScreen, false)
 cancelDeletionBtn.addEventListener('click', cancelDeletion, false)
+editTaskBtn.addEventListener('click', confirmEdition, false)
+cancelEditionBtn.addEventListener('click', cancelEdition, false)
 
 // <section class="display-task">
 //   <img src="../images/unchecked.jpg" class="checkbox-img" data-value="unchecked">

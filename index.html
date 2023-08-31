@@ -19,11 +19,11 @@
       <div class="task-infos">
         <fieldset class="task-fieldset">
           <label for="taskName" class="task-name">Task Name</label>
-          <input id="taskName" class="task-input" type="text">
+          <input id="taskName" class="task-input" type="text" required>
         </fieldset>
         <fieldset class="task-fieldset">
           <label for="taskPriority" class="task-priority">Priority</label>
-          <select id="taskPriority" name="taskPriority" class="task-input priority">
+          <select id="taskPriority" name="taskPriority" class="task-input priority" required>
             <option value="">Select</option>
             <option value="High">High</option>
             <option value="Medium">Medium</option>
@@ -32,7 +32,7 @@
         </fieldset>
         <fieldset class="task-fieldset">
           <label for="taskDate" class="task-date">Completion date (optional)</label>
-          <input id="taskDate" type="date" class="task-input date" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}">
+          <input id="taskDate" type="date" class="task-input date" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}">
         </fieldset>
       </div>
       <button class="task-btn">Add</button>
@@ -42,16 +42,43 @@
       No data to display. Add tasks to start your to-do list!
     </section>
 
-    <div class="modal-wrapper hide">
+    <div class="modal-wrapper-edit hide">
+      <form class="section-wrapper">
+        <h3 class="confirmation-title">Edit Task</h3>
+        <fieldset class="edit-fieldset">
+          <label for="editName" class="edit-name">Task Name:</label>
+          <input type="text" id="editName" class="edit-name-input" required>
+        </fieldset>
+        <fieldset class="edit-fieldset">
+          <label for="editPriority" class="edit-priority">Priority:</label>
+          <select id="editPriority" class="edit-priority-input" required>
+            <option value="">Select</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </fieldset>
+        <fieldset class="edit-fieldset">
+          <label for="editDate" class="edit-date">Completion date:</label>
+          <input type="date" id="editDate" class="edit-date-input" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}">
+        </fieldset>
+        <div class="btn-wrapper">
+          <button class="confirm-edition-btn">Edit</button>
+          <button class="cancel-edition-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-wrapper-deletion hide">
       <section class="section-wrapper">
-        <h3 class="confirmation-title">Please confirm if you want to delete the task</h3>
+        <h4 class="confirmation-title">Please confirm if you want to delete the task</h4>
         <label for="checkNoMsg" class="labelCheckMsg">
           <input type="checkbox" name="checkNoMsg" id="checkNoMsg" class="checkNoMsg">
             Don't show this message again
         </label>
         <div class="btn-wrapper">
-          <button class="confirmation-btn">Delete</button>
-          <button class="cancellation-btn">Cancel</button>
+          <button class="confirm-deletion-btn">Delete</button>
+          <button class="cancel-deletion-btn">Cancel</button>
         </div>
       </section>
     </div>

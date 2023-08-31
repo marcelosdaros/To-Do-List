@@ -80,7 +80,7 @@ body {
         border: transparent;
       }
 
-      .task-btn:hover, .priority:hover, .date:hover, .edit-btn:hover, .delete-btn:hover, .confirmation-btn:hover, .cancellation-btn:hover, .checkbox-img:hover {
+      .task-btn:hover, .priority:hover, .date:hover, .edit-btn:hover, .delete-btn:hover, .confirm-deletion-btn:hover, .cancel-deletion-btn:hover, .checkbox-img:hover, .confirm-edition-btn:hover, .cancel-edition-btn:hover {
         cursor: pointer;
       }
 
@@ -151,7 +151,7 @@ body {
     pointer-events: all;
   } */
 
-  .modal-wrapper {
+  .modal-wrapper-edit, .modal-wrapper-deletion {
     position: fixed;
     top: 0px;
     left: 0px;
@@ -172,7 +172,7 @@ body {
       right: 0px;
       bottom: 0px;
       margin: 0 auto;
-      max-height: 150px;
+      max-height: 250px;
       max-width: 400px;
       background-color:rgb(188, 157, 117);
       border-radius: 20px;
@@ -189,6 +189,12 @@ body {
         font-size: 0.9rem;
       }
 
+      .edit-fieldset {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 25px 20px 25px;
+      }
+
       .btn-wrapper {
         display: flex;
         gap: 20px;
@@ -197,7 +203,7 @@ body {
         bottom: 20px;
       }
 
-        .confirmation-btn, .cancellation-btn {
+        .confirm-deletion-btn, .cancel-deletion-btn, .confirm-edition-btn, .cancel-edition-btn {
           display: block;
           color: white;
           background-color: rgb(128, 106, 76);
