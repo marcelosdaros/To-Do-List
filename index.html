@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles/reset.css">
-  <link rel="stylesheet" href="styles/style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="styles/reset.css"/>
+  <link rel="stylesheet" href="styles/style.css"/>
   <title>To Do List</title>
 </head>
 <body>
@@ -14,16 +14,16 @@
   </header>
 
   <main>
-    <form class="task-form" action="">
+    <form class="task-form">
       <h2 class="task-label">Add Task</h2>
       <div class="task-infos">
         <fieldset class="task-fieldset">
           <label for="taskName" class="task-name">Task Name</label>
-          <input id="taskName" class="task-input" type="text" required>
+          <input id="taskName" name="taskName" class="task-input" type="text"/>
         </fieldset>
         <fieldset class="task-fieldset">
           <label for="taskPriority" class="task-priority">Priority</label>
-          <select id="taskPriority" name="taskPriority" class="task-input priority" required>
+          <select id="taskPriority" name="taskPriority" class="task-input priority">
             <option value="">Select</option>
             <option value="High">High</option>
             <option value="Medium">Medium</option>
@@ -32,26 +32,26 @@
         </fieldset>
         <fieldset class="task-fieldset">
           <label for="taskDate" class="task-date">Completion date (optional)</label>
-          <input id="taskDate" type="date" class="task-input date" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}">
+          <input id="taskDate" type="date" name="taskDate" class="task-input date" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}"/>
         </fieldset>
       </div>
-      <button class="task-btn">Add</button>
+      <button class="task-btn" type="submit">Add</button>
     </form>
 
     <section class="task-section">
       No data to display. Add tasks to start your to-do list!
     </section>
 
-    <div class="modal-wrapper-edit hide">
-      <form class="section-wrapper">
+    <form class="modal-wrapper-edit hide">
+      <div class="section-wrapper">
         <h3 class="confirmation-title">Edit Task</h3>
         <fieldset class="edit-fieldset">
           <label for="editName" class="edit-name">Task Name:</label>
-          <input type="text" id="editName" class="edit-name-input" required>
+          <input type="text" id="editName" name="editName" class="edit-name-input"/>
         </fieldset>
         <fieldset class="edit-fieldset">
           <label for="editPriority" class="edit-priority">Priority:</label>
-          <select id="editPriority" class="edit-priority-input" required>
+          <select id="editPriority" name="editPriority" class="edit-priority-input">
             <option value="">Select</option>
             <option value="High">High</option>
             <option value="Medium">Medium</option>
@@ -60,14 +60,14 @@
         </fieldset>
         <fieldset class="edit-fieldset">
           <label for="editDate" class="edit-date">Completion date:</label>
-          <input type="date" id="editDate" class="edit-date-input" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}">
+          <input type="date" id="editDate" class="edit-date-input" name="editDate" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}"/>
         </fieldset>
         <div class="btn-wrapper">
-          <button class="confirm-edition-btn">Edit</button>
+          <button class="confirm-edition-btn" type="submit">Edit</button>
           <button class="cancel-edition-btn">Cancel</button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
 
     <div class="modal-wrapper-deletion hide">
       <section class="section-wrapper">

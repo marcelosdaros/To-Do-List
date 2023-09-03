@@ -40,26 +40,40 @@ const processEdition = (event) => {
   editName.placeholder = nodes[1].innerHTML
 
   currEdition = parseInt(event.target.parentElement.id)
-  console.log(currEdition)
   modalEdit.classList.toggle('hide')
 }
 
 const confirmEdition = (event) => {
   event.preventDefault()
 
-  const newName = document.querySelector('.edit-name-input').value
-  const newPriority = document.querySelector('.edit-priority-input').value
-  const newDate = document.querySelector('.edit-date-input').value
+  let newName = document.querySelector('.edit-name-input')
+  let newPriority = document.querySelector('.edit-priority-input')
+  let newDate = document.querySelector('.edit-date-input')
+
+  if (newName.value === '') {
+    alert('Task name is mandatory')
+    return
+  }
+  if (newPriority.value === '') {
+    alert('Task priority is mandatory')
+    return
+  }
 
   const taskToEdit = document.getElementById(currEdition)
-  taskToEdit.childNodes[1].innerHTML = newName
-  taskToEdit.childNodes[2].innerHTML = newPriority
-  taskToEdit.childNodes[3].innerHTML = newDate
+  taskToEdit.childNodes[1].innerHTML = newName.value
+  taskToEdit.childNodes[2].innerHTML = newPriority.value
+  if (newDate.value !== '') {
+    taskToEdit.childNodes[3].innerHTML = newDate.value
+  }
 
+  newName.value= ''
+  newPriority.value = ''
+  newDate.value = ''
   modalEdit.classList.toggle('hide')
 }
 
 const cancelEdition = (event) => {
+  event.preventDefault()
   modalEdit.classList.toggle('hide')
 }
 
@@ -153,6 +167,11 @@ const createTaskSection = () => {
 
 const addTask = (event) => {
   event.preventDefault()
+
+  if (document.querySelector('#taskName').value == '' || document.querySelector('#taskPriority').value == '') {
+    alert('Task name and priority are required')
+    return
+  }
   nextTaskId += 1
 
   if (nextTaskId === 1) {
