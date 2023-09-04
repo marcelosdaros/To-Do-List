@@ -95,6 +95,12 @@ body {
     color:rgb(128, 106, 76);
   }
 
+    .no-data {
+      padding: 20px 0px 20px 0px;
+      border-top: 1px solid;
+      border-bottom: 1px solid;
+    }
+
     .display-titles, .display-task {
       display: flex;
       justify-content: space-between;

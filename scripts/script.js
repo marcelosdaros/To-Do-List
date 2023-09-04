@@ -4,11 +4,12 @@ const taskSection = document.querySelector('.task-section')
 const addTaskBtn = document.querySelector('.task-btn')
 const modalEdit = document.querySelector('.modal-wrapper-edit')
 const modalDeletion = document.querySelector('.modal-wrapper-deletion')
-const checkNoMsg = document.querySelector('.checkNoMsg')
 const deleteTaskBtn = document.querySelector('.confirm-deletion-btn')
 const cancelDeletionBtn = document.querySelector('.cancel-deletion-btn')
 const editTaskBtn = document.querySelector('.confirm-edition-btn')
 const cancelEditionBtn = document.querySelector('.cancel-edition-btn')
+const checkNoMsg = document.querySelector('.checkNoMsg')
+const noData = document.querySelector('.no-data')
 let nextTaskId = 0
 let currEdition = 0
 let currDeletion = 0
@@ -104,7 +105,7 @@ const confirmDeletion = () => {
   currDeletion = 0
   
   if (nextTaskId === 0) {
-    taskSection.innerHTML = 'No data to display. Add tasks to start your to-do list!'
+    noData.classList.toggle('hide')
   }
 }
 
@@ -172,19 +173,11 @@ const addTask = (event) => {
     alert('Task name and priority are required')
     return
   }
-  nextTaskId += 1
 
-  if (nextTaskId === 1) {
-    taskSection.innerHTML = `
-      <section class="display-titles">
-        <p class="checkbox-space"></p>
-        <p class="display-name">Task Name</p>
-        <p class="display-priority">Priority</p>
-        <p class="display-date">Completion date</p>
-        <p class="display-edition">Edit</p>
-        <p class="display-deletion">Delete</p>
-      </section>`;
+  if (nextTaskId === 0) {
+    noData.classList.toggle('hide')
   }
+  nextTaskId += 1
   createTaskSection()
 }
 
