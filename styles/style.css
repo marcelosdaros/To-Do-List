@@ -121,6 +121,28 @@ body {
         width: 25px;
       }
 
+      .checkbox-space {
+        display: flex;
+        cursor: pointer;
+      }
+
+      .sort-btn-checked, .sort-btn-name, .sort-btn-priority, .sort-btn-date {
+        height: 6px;
+        width: 10px;
+        margin-left: 5px;
+      }
+
+      .display-name, .display-priority, .display-date {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100px;
+      }
+
+      .p-name, .sort-btn-name, .display-priority, .display-date {
+        cursor: pointer;
+      }
+
       .display-name {
         width: 550px;
       }
@@ -138,10 +160,6 @@ body {
         text-decoration-thickness: 1.5px;
       }
 
-      .display-priority, .display-date {
-        width: 100px;
-      }
-
       .edit-btn, .delete-btn {
         color: white;
         background-color:rgb(188, 157, 117);
@@ -150,12 +168,6 @@ body {
         border-radius: 10px;
         border: 2px solid transparent;
       }
-
-  /* .modal-wrapper, .section-wrapper {
-    transition: 0.5s;
-    opacity: 1;
-    pointer-events: all;
-  } */
 
   .modal-wrapper-edit, .modal-wrapper-deletion {
     position: fixed;

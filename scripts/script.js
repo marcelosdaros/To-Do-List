@@ -2,37 +2,83 @@
 
 const taskSection = document.querySelector('.task-section')
 const addTaskBtn = document.querySelector('.task-btn')
-const modalEdit = document.querySelector('.modal-wrapper-edit')
 const modalDeletion = document.querySelector('.modal-wrapper-deletion')
 const deleteTaskBtn = document.querySelector('.confirm-deletion-btn')
 const cancelDeletionBtn = document.querySelector('.cancel-deletion-btn')
+const modalEdit = document.querySelector('.modal-wrapper-edit')
 const editTaskBtn = document.querySelector('.confirm-edition-btn')
 const cancelEditionBtn = document.querySelector('.cancel-edition-btn')
 const checkNoMsg = document.querySelector('.checkNoMsg')
 const noData = document.querySelector('.no-data')
+const sortCheckMark = document.querySelector('.checkbox-space')
+const sortPName = document.querySelector('.p-name')
+const sortImgName = document.querySelector('.sort-btn-name')
+const sortPriority = document.querySelector('.display-priority')
+const sortDate = document.querySelector('.display-date')
 let nextTaskId = 0
 let currEdition = 0
 let currDeletion = 0
 let hideMsg = false
 
-const checkControl = (event) => {
-  const ev = event.target
-  const attributes = ev.attributes
-  const nodes = ev.parentElement.childNodes
+const createTaskSection = () => {
+  const description = document.querySelector('#taskName').value
+  const priority = document.querySelector('#taskPriority').value
+  const date = document.querySelector('#taskDate').value
 
-  if (ev.dataset.value === "unchecked") {
-    attributes.src.value = "../images/checked.jpg"
-    ev.setAttribute('data-value', 'checked')
-    for (let i = 1; i <= 3; i++) {
-      nodes[i].classList.toggle('checked')
-    }
-  } else {
-    attributes.src.value = "../images/unchecked.jpg"
-    ev.setAttribute('data-value', 'unchecked')
-    for (let i = 1; i <= 3; i++) {
-      nodes[i].classList.toggle('checked')
-    }
+  const taskElement = document.createElement('section')
+  taskElement.id = nextTaskId
+  taskElement.className = 'display-task'
+
+  const image = document.createElement('img')
+  image.src = '../images/unchecked.jpg'
+  image.className = 'checkbox-img'
+  image.setAttribute('data-value', 'unchecked')
+  image.addEventListener('click', checkControl, false)
+  taskElement.appendChild(image)
+
+  const taskName = document.createElement('p')
+  taskName.className = 'display-name'
+  taskName.innerHTML = description
+  taskElement.appendChild(taskName)
+
+  const taskPriority = document.createElement('p')
+  taskPriority.className = 'display-priority'
+  taskPriority.innerHTML = priority
+  taskElement.appendChild(taskPriority)
+
+  const taskDate = document.createElement('p')
+  taskDate.className = 'display-date'
+  taskDate.innerHTML = date
+  taskElement.appendChild(taskDate)
+
+  const editBtn = document.createElement('button')
+  editBtn.className = 'edit-btn'
+  editBtn.innerHTML = 'Edit'
+  editBtn.addEventListener('click', processEdition, false)
+  taskElement.appendChild(editBtn)
+
+  const deleteBtn = document.createElement('button')
+  deleteBtn.className = 'delete-btn'
+  deleteBtn.innerHTML = 'Delete'
+  deleteBtn.addEventListener('click', processDeletion, false)
+  taskElement.appendChild(deleteBtn)
+
+  taskSection.appendChild(taskElement)
+}
+
+const addTask = (event) => {
+  event.preventDefault()
+
+  if (document.querySelector('#taskName').value == '' || document.querySelector('#taskPriority').value == '') {
+    alert('Task name and priority are required')
+    return
   }
+
+  if (nextTaskId === 0) {
+    noData.classList.toggle('hide')
+  }
+  nextTaskId += 1
+  createTaskSection()
 }
 
 const processEdition = (event) => {
@@ -120,65 +166,40 @@ const hideConfirmationMsg = (event) => {
   event.target.checked ? hideMsg = true : hideMsg = false
 }
 
-const createTaskSection = () => {
-  const description = document.querySelector('#taskName').value
-  const priority = document.querySelector('#taskPriority').value
-  const date = document.querySelector('#taskDate').value
+const checkControl = (event) => {
+  const ev = event.target
+  const attributes = ev.attributes
+  const nodes = ev.parentElement.childNodes
 
-  const taskElement = document.createElement('section')
-  taskElement.id = nextTaskId
-  taskElement.className = 'display-task'
-
-  const image = document.createElement('img')
-  image.src = '../images/unchecked.jpg'
-  image.className = 'checkbox-img'
-  image.setAttribute('data-value', 'unchecked')
-  image.addEventListener('click', checkControl, false)
-  taskElement.appendChild(image)
-
-  const taskName = document.createElement('p')
-  taskName.className = 'display-name'
-  taskName.innerHTML = description
-  taskElement.appendChild(taskName)
-
-  const taskPriority = document.createElement('p')
-  taskPriority.className = 'display-priority'
-  taskPriority.innerHTML = priority
-  taskElement.appendChild(taskPriority)
-
-  const taskDate = document.createElement('p')
-  taskDate.className = 'display-date'
-  taskDate.innerHTML = date
-  taskElement.appendChild(taskDate)
-
-  const editBtn = document.createElement('button')
-  editBtn.className = 'edit-btn'
-  editBtn.innerHTML = 'Edit'
-  editBtn.addEventListener('click', processEdition, false)
-  taskElement.appendChild(editBtn)
-
-  const deleteBtn = document.createElement('button')
-  deleteBtn.className = 'delete-btn'
-  deleteBtn.innerHTML = 'Delete'
-  deleteBtn.addEventListener('click', processDeletion, false)
-  taskElement.appendChild(deleteBtn)
-
-  taskSection.appendChild(taskElement)
+  if (ev.dataset.value === "unchecked") {
+    attributes.src.value = "../images/checked.jpg"
+    ev.setAttribute('data-value', 'checked')
+    for (let i = 1; i <= 3; i++) {
+      nodes[i].classList.toggle('checked')
+    }
+  } else {
+    attributes.src.value = "../images/unchecked.jpg"
+    ev.setAttribute('data-value', 'unchecked')
+    for (let i = 1; i <= 3; i++) {
+      nodes[i].classList.toggle('checked')
+    }
+  }
 }
 
-const addTask = (event) => {
-  event.preventDefault()
+const sortByCheckMark = (event) => {
 
-  if (document.querySelector('#taskName').value == '' || document.querySelector('#taskPriority').value == '') {
-    alert('Task name and priority are required')
-    return
-  }
+}
 
-  if (nextTaskId === 0) {
-    noData.classList.toggle('hide')
-  }
-  nextTaskId += 1
-  createTaskSection()
+const sortByName = (event) => {
+
+}
+
+const sortByPriority = (event) => {
+
+}
+
+const sortByDate = (event) => {
+
 }
 
 addTaskBtn.addEventListener('click', addTask, false)
@@ -187,6 +208,11 @@ deleteTaskBtn.addEventListener('click', deleteAndHideScreen, false)
 cancelDeletionBtn.addEventListener('click', cancelDeletion, false)
 editTaskBtn.addEventListener('click', confirmEdition, false)
 cancelEditionBtn.addEventListener('click', cancelEdition, false)
+sortCheckMark.addEventListener('click', sortByCheckMark, false)
+sortPName.addEventListener('click', sortByName, false)
+sortImgName.addEventListener('click', sortByName, false)
+sortPriority.addEventListener('click', sortByPriority, false)
+sortDate.addEventListener('click', sortByDate, false)
 
 // <section class="display-task">
 //   <img src="../images/unchecked.jpg" class="checkbox-img" data-value="unchecked">
