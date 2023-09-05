@@ -19,6 +19,7 @@ let nextTaskId = 0
 let currEdition = 0
 let currDeletion = 0
 let hideMsg = false
+let tasks = []
 
 const createTaskSection = () => {
   const description = document.querySelector('#taskName').value
@@ -64,6 +65,15 @@ const createTaskSection = () => {
   taskElement.appendChild(deleteBtn)
 
   taskSection.appendChild(taskElement)
+  tasks.push(
+    {
+      id: nextTaskId,
+      checkStatus: 'unchecked',
+      name: description,
+      priority: priority,
+      date: date
+    }
+  )
 }
 
 const addTask = (event) => {
@@ -188,6 +198,8 @@ const checkControl = (event) => {
 
 const sortByCheckMark = (event) => {
   sortAnimation('check')
+
+
 }
 
 const sortByName = (event) => {
