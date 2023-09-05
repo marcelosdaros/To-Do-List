@@ -187,19 +187,54 @@ const checkControl = (event) => {
 }
 
 const sortByCheckMark = (event) => {
-
+  sortAnimation('check')
 }
 
 const sortByName = (event) => {
-
+  sortAnimation('name')
 }
 
 const sortByPriority = (event) => {
-
+  sortAnimation('priority')
 }
 
 const sortByDate = (event) => {
+  sortAnimation('date')
+}
 
+const sortAnimation = (operation) => {
+  let targetElement = undefined
+  let targetBtn = undefined
+
+  switch (operation) {
+    case 'check':
+      targetElement = document.querySelector('.checkbox-space')
+      targetBtn = '.sort-btn-checked'
+      break
+    case 'name':
+      targetElement = document.querySelector('.display-name')
+      targetBtn = '.sort-btn-name'
+      break
+    case 'priority':
+      targetElement = document.querySelector('.display-priority')
+      targetBtn = '.sort-btn-priority'
+      break
+    case 'date':
+      targetElement = document.querySelector('.display-date')
+      targetBtn = '.sort-btn-date'
+      break
+    default:
+      return
+  }
+
+  if (targetElement.dataset.arrowdown === 'true') {
+    document.querySelector(targetBtn).attributes.src.value = "/images/arrow_up.jpg"
+    targetElement.setAttribute("data-arrowdown", "false")
+  }
+  else {
+    document.querySelector(targetBtn).attributes.src.value = "/images/arrow_down.jpg"
+    targetElement.setAttribute("data-arrowdown", "true")
+  }
 }
 
 addTaskBtn.addEventListener('click', addTask, false)
