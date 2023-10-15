@@ -1,6 +1,6 @@
 'use strict';
 
-const taskSection = document.querySelector('.task-section')
+const taskSection = document.querySelector('.display-tasks')
 const addTaskBtn = document.querySelector('.task-btn')
 const modalDeletion = document.querySelector('.modal-wrapper-deletion')
 const deleteTaskBtn = document.querySelector('.confirm-deletion-btn')
@@ -74,6 +74,7 @@ const createTaskSection = () => {
       date: date
     }
   )
+  console.log(tasks)
 }
 
 const addTask = (event) => {
@@ -150,16 +151,19 @@ const deleteAndHideScreen = (event) => {
 }
 
 const confirmDeletion = () => {
-  document.querySelector('.task-section').removeChild(
+  document.querySelector('.display-tasks').removeChild(
     document.getElementById(currDeletion)
   )
   
+  tasks.splice(currDeletion-1, 1)
   for (let i = currDeletion; i < nextTaskId; i++) {
     document.getElementById(i+1).id = i
+    tasks[i-1].id = i
   }
+
   nextTaskId -= 1
   currDeletion = 0
-  
+
   if (nextTaskId === 0) {
     noData.classList.toggle('hide')
   }
@@ -187,19 +191,60 @@ const checkControl = (event) => {
     for (let i = 1; i <= 3; i++) {
       nodes[i].classList.toggle('checked')
     }
-  } else {
+    tasks.find((element) => element.id == ev.parentElement.id).checkStatus = 'checked'
+  }
+  else {
     attributes.src.value = "../images/unchecked.jpg"
     ev.setAttribute('data-value', 'unchecked')
     for (let i = 1; i <= 3; i++) {
       nodes[i].classList.toggle('checked')
     }
+    tasks.find((element) => element.id == ev.parentElement.id).checkStatus = 'unchecked'
   }
 }
 
 const sortByCheckMark = (event) => {
   sortAnimation('check')
+  let sortedTasks = ''
 
+  if (document.querySelector('.checkbox-space').dataset.arrowdown === 'true') {
+    tasks.sort((a, b) => {
+      if (a.checkStatus < b.checkStatus) {
+        return 1
+      }
+      if (a.checkStatus > b.checkStatus) {
+        return -1
+      }
+      return 0
+    })
+  }
+  else {
+    tasks.sort((a, b) => {
+      if (a.checkStatus < b.checkStatus) {
+        return -1
+      }
+      if (a.checkStatus > b.checkStatus) {
+        return 1
+      }
+      return 0
+    })
+  }
+  console.log(tasks)
 
+  tasks.forEach((task) => {
+    sortedTasks += `<section id=${task.id} class="display-task">
+                      <img src="../images/${task.checkStatus}.jpg" class="checkbox-img" data-value="${task.checkStatus}">
+                      <p class="display-name p-name ${task.checkStatus}">${task.name}</p>
+                      <p class="display-priority ${task.checkStatus}">${task.priority}</p>
+                      <p class="display-date ${task.checkStatus}">${task.date}</p>
+                      <button class="edit-btn">Edit</button>
+                      <button class="delete-btn">Delete</button>
+                    </section>`
+  })
+  taskSection.innerHTML = sortedTasks
+  document.querySelector('.display-tasks').childNodes.forEach((task) => {
+    addTaskEvents(task)
+  })
 }
 
 const sortByName = (event) => {
@@ -249,6 +294,13 @@ const sortAnimation = (operation) => {
   }
 }
 
+const addTaskEvents = (task) => {
+  console.log(task.childNodes)
+  task.childNodes[1].addEventListener('click', checkControl, false)
+  task.childNodes[9].addEventListener('click', processEdition, false)
+  task.childNodes[11].addEventListener('click', processDeletion, false)
+}
+
 addTaskBtn.addEventListener('click', addTask, false)
 checkNoMsg.addEventListener('change', hideConfirmationMsg, false)
 deleteTaskBtn.addEventListener('click', deleteAndHideScreen, false)
@@ -261,11 +313,13 @@ sortImgName.addEventListener('click', sortByName, false)
 sortPriority.addEventListener('click', sortByPriority, false)
 sortDate.addEventListener('click', sortByDate, false)
 
-// <section class="display-task">
-//   <img src="../images/unchecked.jpg" class="checkbox-img" data-value="unchecked">
-//   <p class="display-name p-name">${description}</p>
-//   <p class="display-priority">${priority}</p>
-//   <p class="display-date">${date}</p>
-//   <button class="edit-btn">Edit</button>
-//   <button class="delete-btn">Delete</button>
-// </section>
+{/*
+<section class="display-task">
+  <img src="../images/unchecked.jpg" class="checkbox-img" data-value="unchecked">
+  <p class="display-name p-name">${description}</p>
+  <p class="display-priority">${priority}</p>
+  <p class="display-date">${date}</p>
+  <button class="edit-btn">Edit</button>
+  <button class="delete-btn">Delete</button>
+</section>
+*/}
