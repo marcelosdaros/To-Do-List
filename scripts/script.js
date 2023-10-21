@@ -21,35 +21,31 @@ let currDeletion = 0
 let hideMsg = false
 let tasks = []
 
-const createTaskSection = () => {
-  const description = document.querySelector('#taskName').value
-  const priority = document.querySelector('#taskPriority').value
-  const date = document.querySelector('#taskDate').value
-
+const createTaskSection = (task) => {
   const taskElement = document.createElement('section')
-  taskElement.id = nextTaskId
+  taskElement.id = task.id
   taskElement.className = 'display-task'
 
   const image = document.createElement('img')
-  image.src = '../images/unchecked.jpg'
+  image.src = `../images/${task.checkStatus}.jpg`
   image.className = 'checkbox-img'
-  image.setAttribute('data-value', 'unchecked')
+  image.setAttribute('data-value', `${task.checkStatus}`)
   image.addEventListener('click', checkControl, false)
   taskElement.appendChild(image)
 
   const taskName = document.createElement('p')
-  taskName.className = 'display-name'
-  taskName.innerHTML = description
+  taskName.className = `display-name ${task.checkStatus}`
+  taskName.innerHTML = task.name
   taskElement.appendChild(taskName)
 
   const taskPriority = document.createElement('p')
-  taskPriority.className = 'display-priority'
-  taskPriority.innerHTML = priority
+  taskPriority.className = `display-priority ${task.checkStatus}`
+  taskPriority.innerHTML = task.priority
   taskElement.appendChild(taskPriority)
 
   const taskDate = document.createElement('p')
-  taskDate.className = 'display-date'
-  taskDate.innerHTML = date
+  taskDate.className = `display-date ${task.checkStatus}`
+  taskDate.innerHTML = task.date
   taskElement.appendChild(taskDate)
 
   const editBtn = document.createElement('button')
@@ -65,16 +61,6 @@ const createTaskSection = () => {
   taskElement.appendChild(deleteBtn)
 
   taskSection.appendChild(taskElement)
-  tasks.push(
-    {
-      id: nextTaskId,
-      checkStatus: 'unchecked',
-      name: description,
-      priority: priority,
-      date: date
-    }
-  )
-  console.log(tasks)
 }
 
 const addTask = (event) => {
@@ -89,7 +75,16 @@ const addTask = (event) => {
     noData.classList.toggle('hide')
   }
   nextTaskId += 1
-  createTaskSection()
+
+  const task = {
+    id: nextTaskId,
+    checkStatus: 'unchecked',
+    name: document.querySelector('#taskName').value,
+    priority: document.querySelector('#taskPriority').value,
+    date: document.querySelector('#taskDate').value
+  }
+  tasks.push(task)
+  createTaskSection(task)
 }
 
 const processEdition = (event) => {
@@ -229,22 +224,9 @@ const sortByCheckMark = (event) => {
       return 0
     })
   }
-  console.log(tasks)
 
-  tasks.forEach((task) => {
-    sortedTasks += `<section id=${task.id} class="display-task">
-                      <img src="../images/${task.checkStatus}.jpg" class="checkbox-img" data-value="${task.checkStatus}">
-                      <p class="display-name p-name ${task.checkStatus}">${task.name}</p>
-                      <p class="display-priority ${task.checkStatus}">${task.priority}</p>
-                      <p class="display-date ${task.checkStatus}">${task.date}</p>
-                      <button class="edit-btn">Edit</button>
-                      <button class="delete-btn">Delete</button>
-                    </section>`
-  })
-  taskSection.innerHTML = sortedTasks
-  document.querySelector('.display-tasks').childNodes.forEach((task) => {
-    addTaskEvents(task)
-  })
+  taskSection.innerHTML = ''
+  tasks.forEach(task => createTaskSection(task))
 }
 
 const sortByName = (event) => {
@@ -292,13 +274,6 @@ const sortAnimation = (operation) => {
     document.querySelector(targetBtn).attributes.src.value = "/images/arrow_down.jpg"
     targetElement.setAttribute("data-arrowdown", "true")
   }
-}
-
-const addTaskEvents = (task) => {
-  console.log(task.childNodes)
-  task.childNodes[1].addEventListener('click', checkControl, false)
-  task.childNodes[9].addEventListener('click', processEdition, false)
-  task.childNodes[11].addEventListener('click', processDeletion, false)
 }
 
 addTaskBtn.addEventListener('click', addTask, false)
