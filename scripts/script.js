@@ -159,7 +159,6 @@ const confirmDeletion = () => {
   nextTaskId -= 1
   currDeletion = 0
 
-  console.log(nextTaskId)
   if (nextTaskId === 0) {
     console.log('test')
     noData.classList.toggle('hide')
