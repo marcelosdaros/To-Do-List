@@ -140,7 +140,7 @@ const processDeletion = (event) => {
   }
 }
 
-const deleteAndHideScreen = (event) => {
+const deleteAndHideScreen = () => {
   confirmDeletion()
   modalDeletion.classList.toggle('hide')
 }
@@ -164,7 +164,7 @@ const confirmDeletion = () => {
   }
 }
 
-const cancelDeletion = (event) => {
+const cancelDeletion = () => {
   modalDeletion.classList.toggle('hide')
   currDeletion = 0
   hideMsg = false
@@ -196,49 +196,6 @@ const checkControl = (event) => {
     }
     tasks.find((element) => element.id == ev.parentElement.id).checkStatus = 'unchecked'
   }
-}
-
-const sortByCheckMark = (event) => {
-  sortAnimation('check')
-  let sortedTasks = ''
-
-  if (document.querySelector('.checkbox-space').dataset.arrowdown === 'true') {
-    tasks.sort((a, b) => {
-      if (a.checkStatus < b.checkStatus) {
-        return 1
-      }
-      if (a.checkStatus > b.checkStatus) {
-        return -1
-      }
-      return 0
-    })
-  }
-  else {
-    tasks.sort((a, b) => {
-      if (a.checkStatus < b.checkStatus) {
-        return -1
-      }
-      if (a.checkStatus > b.checkStatus) {
-        return 1
-      }
-      return 0
-    })
-  }
-
-  taskSection.innerHTML = ''
-  tasks.forEach(task => createTaskSection(task))
-}
-
-const sortByName = (event) => {
-  sortAnimation('name')
-}
-
-const sortByPriority = (event) => {
-  sortAnimation('priority')
-}
-
-const sortByDate = (event) => {
-  sortAnimation('date')
 }
 
 const sortAnimation = (operation) => {
@@ -276,6 +233,127 @@ const sortAnimation = (operation) => {
   }
 }
 
+const sortByCheckMark = () => {
+  sortAnimation('check')
+
+  if (document.querySelector('.checkbox-space').dataset.arrowdown === 'true') {
+    tasks.sort((a, b) => {
+      if (a.checkStatus < b.checkStatus) {
+        return 1
+      }
+      if (a.checkStatus > b.checkStatus) {
+        return -1
+      }
+      return 0
+    })
+  }
+  else {
+    tasks.sort((a, b) => {
+      if (a.checkStatus < b.checkStatus) {
+        return -1
+      }
+      if (a.checkStatus > b.checkStatus) {
+        return 1
+      }
+      return 0
+    })
+  }
+
+  recreateTasks()
+}
+
+const sortByName = () => {
+  sortAnimation('name')
+
+  if (document.querySelector('.display-name').dataset.arrowdown === 'true') {
+    tasks.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1
+      }
+      if (a.name > b.name) {
+        return 1
+      }
+      return 0
+    })
+  }
+  else {
+    tasks.sort((a, b) => {
+      if (a.name < b.name) {
+        return 1
+      }
+      if (a.name > b.name) {
+        return -1
+      }
+      return 0
+    })
+  }
+
+  recreateTasks()
+}
+
+const sortByPriority = () => {
+  sortAnimation('priority')
+
+  if (document.querySelector('.display-priority').dataset.arrowdown === 'true') {
+    tasks.sort((a, b) => {
+      if (a.priority < b.priority) {
+        return -1
+      }
+      if (a.priority > b.priority) {
+        return 1
+      }
+      return 0
+    })
+  }
+  else {
+    tasks.sort((a, b) => {
+      if (a.priority < b.priority) {
+        return 1
+      }
+      if (a.priority > b.priority) {
+        return -1
+      }
+      return 0
+    })
+  }
+
+  recreateTasks()
+}
+
+const sortByDate = () => {
+  sortAnimation('date')
+
+  if (document.querySelector('.display-date').dataset.arrowdown === 'true') {
+    tasks.sort((a, b) => {
+      if (a.date < b.date) {
+        return -1
+      }
+      if (a.date > b.date) {
+        return 1
+      }
+      return 0
+    })
+  }
+  else {
+    tasks.sort((a, b) => {
+      if (a.date < b.date) {
+        return 1
+      }
+      if (a.date > b.date) {
+        return -1
+      }
+      return 0
+    })
+  }
+
+  recreateTasks()
+}
+
+const recreateTasks = () => {
+  taskSection.innerHTML = ''
+  tasks.forEach(task => createTaskSection(task))
+}
+
 addTaskBtn.addEventListener('click', addTask, false)
 checkNoMsg.addEventListener('change', hideConfirmationMsg, false)
 deleteTaskBtn.addEventListener('click', deleteAndHideScreen, false)
@@ -287,14 +365,3 @@ sortPName.addEventListener('click', sortByName, false)
 sortImgName.addEventListener('click', sortByName, false)
 sortPriority.addEventListener('click', sortByPriority, false)
 sortDate.addEventListener('click', sortByDate, false)
-
-{/*
-<section class="display-task">
-  <img src="../images/unchecked.jpg" class="checkbox-img" data-value="unchecked">
-  <p class="display-name p-name">${description}</p>
-  <p class="display-priority">${priority}</p>
-  <p class="display-date">${date}</p>
-  <button class="edit-btn">Edit</button>
-  <button class="delete-btn">Delete</button>
-</section>
-*/}

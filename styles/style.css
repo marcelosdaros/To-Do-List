@@ -147,6 +147,10 @@ body {
         width: 550px;
       }
 
+      .display-priority {
+        justify-content: left;
+      }
+
       .display-edition, .display-deletion {
         width: 50px;
       }
