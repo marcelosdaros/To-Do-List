@@ -159,7 +159,9 @@ const confirmDeletion = () => {
   nextTaskId -= 1
   currDeletion = 0
 
+  console.log(nextTaskId)
   if (nextTaskId === 0) {
+    console.log('test')
     noData.classList.toggle('hide')
   }
 }
@@ -259,6 +261,7 @@ const sortByCheckMark = () => {
     })
   }
 
+  adjustTaskIds()
   recreateTasks()
 }
 
@@ -288,6 +291,7 @@ const sortByName = () => {
     })
   }
 
+  adjustTaskIds()
   recreateTasks()
 }
 
@@ -317,6 +321,7 @@ const sortByPriority = () => {
     })
   }
 
+  adjustTaskIds()
   recreateTasks()
 }
 
@@ -346,7 +351,14 @@ const sortByDate = () => {
     })
   }
 
+  adjustTaskIds()
   recreateTasks()
+}
+
+const adjustTaskIds = () => {
+  for (let i = 0; i < tasks.length; i++) {
+    tasks[i].id = i+1
+  }
 }
 
 const recreateTasks = () => {
