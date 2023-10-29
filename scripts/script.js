@@ -19,7 +19,34 @@ let nextTaskId = 0
 let currentEditionID = 0
 let currDeletion = 0
 let hideMsg = false
-let tasks = []
+let tasks = localStorage.getItem('tasks')
+
+const addTask = (event) => {
+  event.preventDefault()
+
+  if (document.querySelector('#taskName').value == '' || document.querySelector('#taskPriority').value == '') {
+    alert('Task name and priority are required')
+    return
+  }
+
+  if (nextTaskId === 0) {
+    noData.classList.toggle('hide')
+  }
+  nextTaskId += 1
+
+  const task = {
+    id: nextTaskId,
+    checkStatus: 'unchecked',
+    name: document.querySelector('#taskName').value,
+    priority: document.querySelector('#taskPriority').value,
+    date: document.querySelector('#taskDate').value
+  }
+
+  tasks.push(task)
+  localStorage.setItem('tasks', JSON.stringify(tasks))
+
+  createTaskSection(task)
+}
 
 const createTaskSection = (task) => {
   const taskElement = document.createElement('section')
@@ -63,30 +90,6 @@ const createTaskSection = (task) => {
   taskSection.appendChild(taskElement)
 }
 
-const addTask = (event) => {
-  event.preventDefault()
-
-  if (document.querySelector('#taskName').value == '' || document.querySelector('#taskPriority').value == '') {
-    alert('Task name and priority are required')
-    return
-  }
-
-  if (nextTaskId === 0) {
-    noData.classList.toggle('hide')
-  }
-  nextTaskId += 1
-
-  const task = {
-    id: nextTaskId,
-    checkStatus: 'unchecked',
-    name: document.querySelector('#taskName').value,
-    priority: document.querySelector('#taskPriority').value,
-    date: document.querySelector('#taskDate').value
-  }
-  tasks.push(task)
-  createTaskSection(task)
-}
-
 const processEdition = (event) => {
   const nodes = event.target.parentElement.childNodes
   const editName = document.querySelector('.edit-name-input')
@@ -128,6 +131,7 @@ const confirmEdition = (event) => {
   newPriority.value = ''
   newDate.value = ''
   modalEdit.classList.toggle('hide')
+  localStorage.setItem('tasks', JSON.stringify(tasks))
 }
 
 const cancelEdition = (event) => {
@@ -139,8 +143,7 @@ const processDeletion = (event) => {
   currDeletion = parseInt(event.target.parentElement.id)
   if (!hideMsg) {
     modalDeletion.classList.toggle('hide')
-  }
-  else {
+  } else {
     confirmDeletion()
   }
 }
@@ -165,8 +168,10 @@ const confirmDeletion = () => {
   currDeletion = 0
 
   if (nextTaskId === 0) {
-    console.log('test')
     noData.classList.toggle('hide')
+    localStorage.setItem('tasks', null)
+  } else {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
   }
 }
 
@@ -193,8 +198,7 @@ const checkControl = (event) => {
       nodes[i].classList.toggle('checked')
     }
     tasks.find((element) => element.id == ev.parentElement.id).checkStatus = 'checked'
-  }
-  else {
+  } else {
     attributes.src.value = "../images/unchecked.jpg"
     ev.setAttribute('data-value', 'unchecked')
     for (let i = 1; i <= 3; i++) {
@@ -202,6 +206,7 @@ const checkControl = (event) => {
     }
     tasks.find((element) => element.id == ev.parentElement.id).checkStatus = 'unchecked'
   }
+  localStorage.setItem('tasks', JSON.stringify(tasks))
 }
 
 const sortAnimation = (operation) => {
@@ -232,8 +237,7 @@ const sortAnimation = (operation) => {
   if (targetElement.dataset.arrowdown === 'true') {
     document.querySelector(targetBtn).attributes.src.value = "/images/arrow_up.jpg"
     targetElement.setAttribute("data-arrowdown", "false")
-  }
-  else {
+  } else {
     document.querySelector(targetBtn).attributes.src.value = "/images/arrow_down.jpg"
     targetElement.setAttribute("data-arrowdown", "true")
   }
@@ -363,11 +367,24 @@ const adjustTaskIds = () => {
   for (let i = 0; i < tasks.length; i++) {
     tasks[i].id = i+1
   }
+  localStorage.setItem('tasks', JSON.stringify(tasks))
 }
 
 const recreateTasks = () => {
   taskSection.innerHTML = ''
   tasks.forEach(task => createTaskSection(task))
+}
+
+tasks = JSON.parse(tasks)
+
+if (tasks !== null) {
+  noData.classList.toggle('hide')
+  nextTaskId = tasks.length
+  tasks.forEach((task) => {
+    createTaskSection(task)
+  })
+} else {
+  tasks = []
 }
 
 addTaskBtn.addEventListener('click', addTask, false)

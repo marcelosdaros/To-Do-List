@@ -11,7 +11,7 @@ body {
 }
 
   .page-title {
-    margin: 40px 20px 0px 20px;
+    margin-top: 30px;
     font-size: 2.5rem;
     color:rgb(188, 157, 117);
     text-align: center;
@@ -22,7 +22,7 @@ body {
     max-width: 1200px;
     text-align: center;
     margin: auto;
-    margin-top: 40px;
+    margin-top: 30px;
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: rgba(242, 219, 189, 0.5);
@@ -31,14 +31,13 @@ body {
 
     .task-label {
       font-size: 1.6rem;
-      padding-top: 20px;
       color:rgb(143, 119, 85);
     }
     
     .task-infos {
       display: flex;
       justify-content: space-evenly;
-      margin-top: 30px;
+      margin-top: 20px;
       margin-bottom: 20px;
     }
 
@@ -72,7 +71,6 @@ body {
     .task-btn {
       height: 30px;
       width: 80px;
-      margin: 10px 0 10px 0;
       border-radius: 20px;
       font-size: 1rem;
       color: white;
