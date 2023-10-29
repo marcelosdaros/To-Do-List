@@ -16,7 +16,7 @@ const sortImgName = document.querySelector('.sort-btn-name')
 const sortPriority = document.querySelector('.display-priority')
 const sortDate = document.querySelector('.display-date')
 let nextTaskId = 0
-let currEdition = 0
+let currentEditionID = 0
 let currDeletion = 0
 let hideMsg = false
 let tasks = []
@@ -92,7 +92,7 @@ const processEdition = (event) => {
   const editName = document.querySelector('.edit-name-input')
   editName.placeholder = nodes[1].innerHTML
 
-  currEdition = parseInt(event.target.parentElement.id)
+  currentEditionID = parseInt(event.target.parentElement.id)
   modalEdit.classList.toggle('hide')
 }
 
@@ -112,12 +112,17 @@ const confirmEdition = (event) => {
     return
   }
 
-  const taskToEdit = document.getElementById(currEdition)
+  const taskToEdit = document.getElementById(currentEditionID)
   taskToEdit.childNodes[1].innerHTML = newName.value
   taskToEdit.childNodes[2].innerHTML = newPriority.value
   if (newDate.value !== '') {
     taskToEdit.childNodes[3].innerHTML = newDate.value
   }
+
+  const idFromTasksArray = currentEditionID-1
+  tasks[idFromTasksArray].name = newName.value
+  tasks[idFromTasksArray].priority = newPriority.value
+  tasks[idFromTasksArray].date = newDate.value
 
   newName.value= ''
   newPriority.value = ''

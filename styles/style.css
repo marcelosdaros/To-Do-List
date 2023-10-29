@@ -69,18 +69,18 @@ body {
           width: 100px;
         }
     
-      .task-btn {
-        height: 30px;
-        width: 80px;
-        margin: 10px 0 10px 0;
-        border-radius: 20px;
-        font-size: 1rem;
-        color: white;
-        background-color:rgb(188, 157, 117);
-        border: transparent;
-      }
+    .task-btn {
+      height: 30px;
+      width: 80px;
+      margin: 10px 0 10px 0;
+      border-radius: 20px;
+      font-size: 1rem;
+      color: white;
+      background-color:rgb(188, 157, 117);
+      border: transparent;
+    }
 
-      .task-btn:hover, .priority:hover, .date:hover, .edit-btn:hover, .delete-btn:hover, .confirm-deletion-btn:hover, .cancel-deletion-btn:hover, .checkbox-img:hover, .confirm-edition-btn:hover, .cancel-edition-btn:hover {
+      .task-btn:hover, .priority:hover, .date:hover, .edit-btn:hover, .delete-btn:hover, .checkbox-img:hover {
         cursor: pointer;
       }
 
@@ -94,12 +94,6 @@ body {
     padding: 20px;
     color:rgb(128, 106, 76);
   }
-
-    .no-data {
-      padding: 20px 0px 20px 0px;
-      border-top: 1px solid;
-      border-bottom: 1px solid;
-    }
 
     .display-titles, .display-task {
       display: flex;
@@ -173,6 +167,12 @@ body {
         border: 2px solid transparent;
       }
 
+    .no-data {
+      padding: 20px 0px 20px 0px;
+      border-top: 1px solid;
+      border-bottom: 1px solid;
+    }
+
   .modal-wrapper-edit, .modal-wrapper-deletion {
     position: fixed;
     top: 0px;
@@ -187,9 +187,9 @@ body {
     display: none;
   }
 
-    .section-wrapper {
+    .section-wrapper-edition, .section-wrapper-deletion {
       position: fixed;
-      top: 300px;
+      top: 150px;
       left: 0px;
       right: 0px;
       bottom: 0px;
@@ -198,6 +198,10 @@ body {
       max-width: 400px;
       background-color:rgb(188, 157, 117);
       border-radius: 20px;
+    }
+
+    .section-wrapper-deletion {
+      max-height: 150px;
     }
 
       .confirmation-title, .labelCheckMsg {
@@ -217,6 +221,11 @@ body {
         margin: 20px 25px 20px 25px;
       }
 
+        .edit-name-input, .edit-priority-input, .edit-date-input {
+          border-radius: 6px;
+          border-style: none;
+        }
+
       .btn-wrapper {
         display: flex;
         gap: 20px;
@@ -233,4 +242,9 @@ body {
           width: 100px;
           border-radius: 10px;
           border: 2px solid transparent;
+        }
+
+        .confirm-deletion-btn:hover, .cancel-deletion-btn:hover, .confirm-edition-btn:hover, .cancel-edition-btn:hover {
+          cursor: pointer;
+          border: 2px solid rgb(73, 63, 49);
         }
