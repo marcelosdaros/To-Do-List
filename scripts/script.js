@@ -130,6 +130,7 @@ const confirmEdition = (event) => {
   newName.value= ''
   newPriority.value = ''
   newDate.value = ''
+  
   modalEdit.classList.toggle('hide')
   localStorage.setItem('tasks', JSON.stringify(tasks))
 }
@@ -141,6 +142,7 @@ const cancelEdition = (event) => {
 
 const processDeletion = (event) => {
   currDeletion = parseInt(event.target.parentElement.id)
+
   if (!hideMsg) {
     modalDeletion.classList.toggle('hide')
   } else {
@@ -256,8 +258,7 @@ const sortByCheckMark = () => {
       }
       return 0
     })
-  }
-  else {
+  } else {
     tasks.sort((a, b) => {
       if (a.checkStatus < b.checkStatus) {
         return -1
@@ -286,8 +287,7 @@ const sortByName = () => {
       }
       return 0
     })
-  }
-  else {
+  } else {
     tasks.sort((a, b) => {
       if (a.name < b.name) {
         return 1
@@ -316,8 +316,7 @@ const sortByPriority = () => {
       }
       return 0
     })
-  }
-  else {
+  } else {
     tasks.sort((a, b) => {
       if (a.priority < b.priority) {
         return 1
@@ -346,8 +345,7 @@ const sortByDate = () => {
       }
       return 0
     })
-  }
-  else {
+  } else {
     tasks.sort((a, b) => {
       if (a.date < b.date) {
         return 1
