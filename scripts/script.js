@@ -54,7 +54,7 @@ const createTaskSection = (task) => {
   taskElement.className = 'display-task'
 
   const image = document.createElement('img')
-  image.src = `../images/${task.checkStatus}.jpg`
+  image.src = `./images/${task.checkStatus}.jpg`
   image.className = 'checkbox-img'
   image.setAttribute('data-value', `${task.checkStatus}`)
   image.addEventListener('click', checkControl, false)
@@ -194,14 +194,14 @@ const checkControl = (event) => {
   const nodes = ev.parentElement.childNodes
 
   if (ev.dataset.value === "unchecked") {
-    attributes.src.value = "../images/checked.jpg"
+    attributes.src.value = "./images/checked.jpg"
     ev.setAttribute('data-value', 'checked')
     for (let i = 1; i <= 3; i++) {
       nodes[i].classList.toggle('checked')
     }
     tasks.find((element) => element.id == ev.parentElement.id).checkStatus = 'checked'
   } else {
-    attributes.src.value = "../images/unchecked.jpg"
+    attributes.src.value = "./images/unchecked.jpg"
     ev.setAttribute('data-value', 'unchecked')
     for (let i = 1; i <= 3; i++) {
       nodes[i].classList.toggle('checked')
@@ -237,10 +237,10 @@ const sortAnimation = (operation) => {
   }
 
   if (targetElement.dataset.arrowdown === 'true') {
-    document.querySelector(targetBtn).attributes.src.value = "/images/arrow_up.jpg"
+    document.querySelector(targetBtn).attributes.src.value = "./images/arrow_up.jpg"
     targetElement.setAttribute("data-arrowdown", "false")
   } else {
-    document.querySelector(targetBtn).attributes.src.value = "/images/arrow_down.jpg"
+    document.querySelector(targetBtn).attributes.src.value = "./images/arrow_down.jpg"
     targetElement.setAttribute("data-arrowdown", "true")
   }
 }
